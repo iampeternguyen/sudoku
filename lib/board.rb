@@ -34,6 +34,11 @@ class Board
     grid
   end
 
+  def update_value(position, value)
+    row, col = position
+    @grid[row][col].change_value(value)
+  end
+
 end
 
 if __FILE__ == $PROGRAM_NAME
