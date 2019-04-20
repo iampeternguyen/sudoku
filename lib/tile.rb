@@ -1,6 +1,8 @@
 require 'colorize'
 
 class Tile
+  attr_reader :value
+
   def initialize(value, was_given=false)
     @value = value
     @was_given = was_given

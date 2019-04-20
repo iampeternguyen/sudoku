@@ -39,10 +39,37 @@ class Board
     @grid[row][col].change_value(value)
   end
 
+  def solved?
+    lines = get_all_lines
+    lines.all? {|line| is_line_solved?(line)}
+  end
+
+  def get_all_lines
+    lines = []
+    @grid.each do |row|
+      lines << row
+    end
+
+    (0...@grid.length).each do |col|
+      column_lines = []
+      (0...@grid.length).each do |row|
+        column_lines << @grid[row][col]
+      end
+      lines << column_lines
+    end
+    lines
+  end
+
+  def is_line_solved?(line)
+    solved = [1,2,3,4,5,6,7,8,9]
+    sorted = (line.map {|tile| tile.value}).sort
+    sorted == solved
+  end
+
 end
 
 if __FILE__ == $PROGRAM_NAME
-  grid = Board.grid_from_file("C:\\Users\\Peter\\Documents\\Coding\\app-academy\\sudoku\\puzzles\\sudoku1.txt")
+  grid = Board.grid_from_file("C:\\Users\\Peter\\Documents\\Coding\\app-academy\\sudoku\\puzzles\\sudoku1_solved.txt")
   board = Board.new(grid)
-  board.render
+  puts board.solved?
 end
