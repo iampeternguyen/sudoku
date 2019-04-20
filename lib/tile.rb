@@ -1,7 +1,7 @@
 require 'colorize'
 
 class Tile
-  def initialize(value, was_given)
+  def initialize(value, was_given=false)
     @value = value
     @was_given = was_given
   end
