@@ -1,5 +1,5 @@
 require_relative "tile.rb"
-
+require "colorize"
 class Board
   attr_reader :grid
 
@@ -13,9 +13,10 @@ class Board
     else
       system('clear')
     end
+    puts "  #{(0...@grid.length).to_a.join(' ')}".colorize(:red)
 
     @grid.each_with_index do |row, i|
-      puts "#{row.join(' ')}"
+      puts "#{i}".colorize(:red) + " #{row.join(' ')}"
     end
   end
 
@@ -71,5 +72,5 @@ end
 if __FILE__ == $PROGRAM_NAME
   grid = Board.grid_from_file("C:\\Users\\Peter\\Documents\\Coding\\app-academy\\sudoku\\puzzles\\sudoku1_solved.txt")
   board = Board.new(grid)
-  puts board.solved?
+  board.render
 end
