@@ -47,10 +47,13 @@ class Board
 
   def get_all_lines
     lines = []
+
+    # Get rows
     @grid.each do |row|
       lines << row
     end
 
+    # Get columns
     (0...@grid.length).each do |col|
       column_lines = []
       (0...@grid.length).each do |row|
@@ -58,6 +61,24 @@ class Board
       end
       lines << column_lines
     end
+
+
+    # Get boxes
+    box1, box2, box3, box4, box5, box6, box7, box8, box9 = [], [], [], [], [], [], [], [], []
+    (0..2).each do |row|
+      (0..2).each do |col|
+        box1 << @grid[row][col]
+        box2 << @grid[row][col+3]
+        box3 << @grid[row][col+6]
+        box4 << @grid[row+3][col]
+        box5 << @grid[row+3][col+3]
+        box6 << @grid[row+3][col+6]
+        box7 << @grid[row+6][col]
+        box8 << @grid[row+6][col+3]
+        box9 << @grid[row+6][col+6]
+      end
+    end
+    lines += [box1, box2, box3, box4, box5, box6, box7, box8, box9]
     lines
   end
 
@@ -72,5 +93,5 @@ end
 if __FILE__ == $PROGRAM_NAME
   grid = Board.grid_from_file("C:\\Users\\Peter\\Documents\\Coding\\app-academy\\sudoku\\puzzles\\sudoku1_solved.txt")
   board = Board.new(grid)
-  board.render
+  puts board.solved?
 end
